@@ -1,14 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { profile } from "../data/profile";
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={`CV | ${profile.name}`}>
   <main class="container section">
     <h1>Curriculum Vitae</h1>
     <p>
-      Download the demo CV as PDF:
-      <a href={profile.cvPdfPath}>Download CV</a>
+      Download the demo CV as PDF: <a href={`${base}${profile.cvPdfPath.replace(/^\/+/, "")}`}>Download CV</a>
     </p>
     <p>
       This is a fake CV used for layout preview and content simulation.
