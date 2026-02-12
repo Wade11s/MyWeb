@@ -17,7 +17,7 @@
   --card-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
   --glass-bg: rgba(255, 255, 255, 0.62);
   --glass-edge: rgba(255, 255, 255, 0.72);
-  --max: 1100px;
+  --max: 1220px;
 }
 
 * {
@@ -56,7 +56,7 @@ button:focus-visible {
 }
 
 .container {
-  width: min(var(--max), 92%);
+  width: min(var(--max), 96%);
   margin: 0 auto;
 }
 
