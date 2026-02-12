@@ -17,7 +17,7 @@
   --card-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
   --glass-bg: rgba(255, 255, 255, 0.62);
   --glass-edge: rgba(255, 255, 255, 0.72);
-  --max: 1280px;
+  --max: 1220px;
 }
 
 * {
