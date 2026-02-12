@@ -7,6 +7,6 @@ const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
 
 export default defineConfig({
   site: "https://wade11s.github.io",
-  base: isGhActions && repoName !== "Wade11s.github.io" ? `/${repoName}` : "/",
+  base: isGhActions && repoName !== "Wade11s.github.io" ? `/${repoName}/` : "/",
   integrations: [react()]
 });
