@@ -35,6 +35,10 @@ body {
   font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
 }
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 a {
   color: var(--brand);
   text-decoration: none;
