@@ -11,7 +11,7 @@ const links = [
 ---
 
 <header>
-  <div class="nav-shell nav-wrap glass-surface">
+  <div class="container nav-wrap glass-surface">
     <a class="brand" href={base}>{profile.name}</a>
     <nav>
       {links.map(([label, href]) => (
@@ -35,8 +35,6 @@ const links = [
   }
 
   .nav-wrap {
-    width: min(1220px, 96%);
-    margin: 0 auto;
     min-height: 58px;
     padding: 0 1.05rem;
     display: flex;
@@ -62,12 +60,18 @@ const links = [
 
   nav {
     display: flex;
-    gap: 0.9rem;
-    flex-wrap: nowrap;
-    white-space: nowrap;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    min-width: 0;
   }
 
   nav a {
+    display: inline-flex;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
     color: var(--text-muted);
     font-size: 0.95rem;
     transition: color 0.16s ease;
@@ -82,7 +86,6 @@ const links = [
     .nav-wrap {
       min-height: 54px;
       padding: 0 0.7rem;
-      width: min(1220px, 97%);
     }
 
     nav {
