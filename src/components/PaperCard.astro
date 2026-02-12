@@ -1,0 +1,36 @@
+---
+const { title, authors, venue, year, type, url, code } = Astro.props;
+---
+
+<article class="card">
+  <p class="meta"><span class="pill">{type}</span> <strong>{year}</strong></p>
+  <h3>{title}</h3>
+  <p>{authors.join(", ")}</p>
+  <p class="venue">{venue}</p>
+  <p class="links">
+    {url && <a href={url} target="_blank" rel="noreferrer">Paper</a>}
+    {code && <a href={code} target="_blank" rel="noreferrer">Code</a>}
+  </p>
+</article>
+
+<style>
+  .meta {
+    margin-bottom: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .venue {
+    color: var(--text-muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 0.9rem;
+    margin: 0;
+  }
+</style>

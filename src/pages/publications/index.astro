@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { profile } from "../../data/profile";
+import PaperCard from "../../components/PaperCard.astro";
+
+const publications = (await getCollection("publications")).sort(
+  (a, b) => b.data.year - a.data.year
+);
+---
+
+<Layout title={`Publications | ${profile.name}`}>
+  <main class="container section">
+    <h1>Publications</h1>
+    <p>Selected papers and recent outputs. Replace sample metadata with your real records.</p>
+
+    <div class="grid">
+      {publications.map((paper) => (
+        <div class="span-12">
+          <PaperCard {...paper.data} />
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .span-12 {
+    grid-column: span 12;
+  }
+</style>

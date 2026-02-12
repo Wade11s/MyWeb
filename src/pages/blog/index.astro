@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { profile } from "../../data/profile";
+import PostCard from "../../components/react/PostCard";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title={`Blog | ${profile.name}`}>
+  <main class="container section">
+    <h1>Notes</h1>
+    <p>Short research and engineering notes from ongoing work.</p>
+
+    <div class="grid">
+      {posts.map((post) => (
+        <div class="span-12">
+          <PostCard
+            href={`/blog/${post.id.replace(/\.md$/, "")}/`}
+            title={post.data.title}
+            summary={post.data.summary}
+            date={post.data.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })}
+            tags={post.data.tags}
+          />
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .span-12 {
+    grid-column: span 12;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import { profile } from "../data/profile";
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container footer-wrap">
+    <p>&copy; {year} {profile.name}. Built with Astro + React.</p>
+    <p>{profile.affiliation}</p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0 2.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  p {
+    margin: 0;
+  }
+</style>

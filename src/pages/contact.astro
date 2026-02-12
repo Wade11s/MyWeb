@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { profile } from "../data/profile";
+---
+
+<Layout title={`Contact | ${profile.name}`}>
+  <main class="container section">
+    <h1>Contact</h1>
+    <p>You can reach me through the following channels.</p>
+
+    <div class="card list">
+      <p><strong>Email:</strong> <a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+      <p><strong>Google Scholar:</strong> <a href={profile.scholar} target="_blank" rel="noreferrer">Profile</a></p>
+      <p><strong>GitHub:</strong> <a href={profile.github} target="_blank" rel="noreferrer">{profile.github}</a></p>
+      <p><strong>LinkedIn:</strong> <a href={profile.linkedin} target="_blank" rel="noreferrer">Profile</a></p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .list p {
+    margin: 0 0 0.6rem;
+  }
+
+  .list p:last-child {
+    margin-bottom: 0;
+  }
+</style>

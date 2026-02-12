@@ -1,11 +1,108 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { profile } from "../data/profile";
+import PaperCard from "../components/PaperCard.astro";
+import PostCard from "../components/react/PostCard";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const publications = (await getCollection("publications"))
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 2);
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
 ---
 
 <Layout>
-	<Welcome />
+  <main class="container">
+    <section class="section hero">
+      <p class="pill">{profile.affiliation}</p>
+      <h1>{profile.name}</h1>
+      <p class="lead">{profile.bio}</p>
+      <p class="actions">
+        <a href="/publications">View Publications</a>
+        <a href="/blog">Read Notes</a>
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Research Interests</h2>
+      <div class="interest-list">
+        {profile.researchInterests.map((item) => (
+          <span class="pill">{item}</span>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Selected Publications</h2>
+      <div class="grid cards">
+        {publications.map((paper) => (
+          <div class="span-6">
+            <PaperCard {...paper.data} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Latest Notes</h2>
+      <div class="grid cards">
+        {posts.map((post) => (
+          <div class="span-6">
+            <PostCard
+              href={`/blog/${post.id.replace(/\.md$/, "")}/`}
+              title={post.data.title}
+              summary={post.data.summary}
+              date={post.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+              })}
+              tags={post.data.tags}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .hero {
+    padding-top: 3.2rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    max-width: 70ch;
+    color: var(--text-muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .interest-list {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .cards {
+    align-items: stretch;
+  }
+
+  .span-6 {
+    grid-column: span 6;
+  }
+
+  @media (max-width: 900px) {
+    .span-6 {
+      grid-column: span 12;
+    }
+  }
+</style>

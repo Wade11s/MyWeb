@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { profile } from "../../data/profile";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, "") },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | ${profile.name}`} description={post.data.summary}>
+  <main class="container section prose">
+    <p class="meta">
+      {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+    </p>
+    <h1>{post.data.title}</h1>
+    <p class="summary">{post.data.summary}</p>
+    <Content />
+  </main>
+</Layout>
+
+<style>
+  .prose {
+    max-width: 760px;
+  }
+
+  .meta,
+  .summary {
+    color: var(--text-muted);
+  }
+
+  :global(.prose h2) {
+    margin-top: 2rem;
+  }
+</style>

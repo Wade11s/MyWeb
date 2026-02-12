@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { profile } from "../data/profile";
+---
+
+<Layout title={`About | ${profile.name}`}>
+  <main class="container section">
+    <h1>About</h1>
+    <p>{profile.bio}</p>
+    <p>
+      I build practical research systems and focus on methods that remain reliable outside clean benchmark settings.
+      This site is where I share publications, technical notes, and ongoing research directions.
+    </p>
+    <h2>Current Focus</h2>
+    <ul>
+      {profile.researchInterests.map((item) => <li>{item}</li>)}
+    </ul>
+  </main>
+</Layout>
+
+<style>
+  ul {
+    padding-left: 1.2rem;
+    line-height: 1.8;
+  }
+</style>
