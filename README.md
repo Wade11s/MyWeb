@@ -20,6 +20,11 @@ bun run build
 bun run preview
 ```
 
+## Checks
+```bash
+bun run check
+```
+
 ## Content Editing
 - Profile and links: `src/data/profile.ts`
 - Blog posts: `src/content/blog/*.md`

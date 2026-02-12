@@ -22,8 +22,8 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       <h1>{profile.name}</h1>
       <p class="lead">{profile.bio}</p>
       <p class="actions">
-        <a href={`${base}publications/`}>View Publications</a>
-        <a href={`${base}blog/`}>Read Notes</a>
+        <a class="button button-primary" href={`${base}publications/`}>View Publications</a>
+        <a class="button button-secondary" href={`${base}blog/`}>Read Notes</a>
       </p>
     </section>
 
@@ -73,6 +73,20 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 <style>
   .hero {
     padding-top: 3.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -12% auto auto -14%;
+    width: 460px;
+    height: 320px;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(96, 165, 250, 0.3) 0%, rgba(96, 165, 250, 0.12) 35%, transparent 72%);
+    filter: blur(8px);
+    z-index: -1;
   }
 
   .lead {
@@ -85,6 +99,11 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .actions a {
+    text-decoration: none;
   }
 
   .interest-list {
@@ -104,6 +123,11 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   @media (max-width: 900px) {
     .span-6 {
       grid-column: span 12;
+    }
+
+    .hero::before {
+      width: 300px;
+      height: 240px;
     }
   }
 </style>

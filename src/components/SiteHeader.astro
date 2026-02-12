@@ -11,7 +11,7 @@ const links = [
 ---
 
 <header>
-  <div class="container nav-wrap">
+  <div class="container nav-wrap glass-surface">
     <a class="brand" href={base}>{profile.name}</a>
     <nav>
       {links.map(([label, href]) => (
@@ -26,17 +26,28 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 10;
-    backdrop-filter: blur(10px);
-    background: color-mix(in hsl, white 75%, transparent 25%);
-    border-bottom: 1px solid var(--line);
+    padding-top: 0.55rem;
+    transition: padding-top 0.2s ease;
+  }
+
+  header.scrolled {
+    padding-top: 0.35rem;
   }
 
   .nav-wrap {
-    min-height: 62px;
+    min-height: 58px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    border-color: transparent;
+    border-radius: 12px;
+    transition: border-color 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  header.scrolled .nav-wrap {
+    border-color: color-mix(in hsl, var(--brand) 24%, var(--line) 76%);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.1);
   }
 
   .brand {
@@ -55,10 +66,27 @@ const links = [
   nav a {
     color: var(--text-muted);
     font-size: 0.95rem;
+    transition: color 0.16s ease;
   }
 
   nav a:hover {
-    color: var(--text);
+    color: var(--brand-strong);
     text-decoration: none;
   }
+
+  @media (max-width: 700px) {
+    .nav-wrap {
+      min-height: 54px;
+    }
+  }
 </style>
+
+<script>
+  const header = document.querySelector("header");
+  const onScroll = () => {
+    if (!header) return;
+    header.classList.toggle("scrolled", window.scrollY > 10);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>
