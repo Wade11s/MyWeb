@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import process from "node:process";
 
 const isGhActions = process.env.GITHUB_ACTIONS === "true";
 const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
