@@ -3,7 +3,10 @@ const { title, authors, venue, year, type, url, code } = Astro.props;
 ---
 
 <article class="card">
-  <p class="meta"><span class="pill">{type}</span> <strong>{year}</strong></p>
+  <p class="meta">
+    <span class="pill">{type}</span>
+    <strong class="year">{year}</strong>
+  </p>
   <h3>{title}</h3>
   <p>{authors.join(", ")}</p>
   <p class="venue">{venue}</p>
@@ -15,8 +18,17 @@ const { title, authors, venue, year, type, url, code } = Astro.props;
 
 <style>
   .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
     margin-bottom: 0.6rem;
     color: var(--text-muted);
+  }
+
+  .year {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
   }
 
   h3 {

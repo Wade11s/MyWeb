@@ -14,6 +14,7 @@ export const profile = {
     "Human-AI Decision Support",
     "Benchmark Design for Applied AI"
   ],
+  photoPath: "/images/profile/minion.png",
   cvPdfPath: "/cv.pdf"
 };
 
